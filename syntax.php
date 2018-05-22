@@ -122,7 +122,7 @@ class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
             return $count; // Number of lines == Number of users online
         }
 
-    //Syntax: {{onlinenumber:texts following the number of online (when the number is 1):texts following the number of online (when the number is 2 or more)
+    //Syntax: {{onlinenumber|texts following the number of online (when the number is 1)|texts following the number of online (when the number is 2 or more)
     //The texts following the number of online are not required (If entered just {{onlinenumber}} , this will return only the number)
 
     function connectTo($mode) {
@@ -134,7 +134,7 @@ class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
 
         static $count, $result, $base;
 
-        return explode(':', substr($match, strlen('{{onlinenumber:'), -2));
+        return explode('|', substr($match, strlen('{{onlinenumber|'), -2));
 
     }
 

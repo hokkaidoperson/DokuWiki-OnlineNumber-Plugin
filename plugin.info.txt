@@ -1,7 +1,7 @@
 base onlinenumber
 author HokkaidoPerson
 email dosankomali@yahoo.co.jp
-date 2018-05-15
+date 2018-05-22
 name The Number of Online Plugin
 desc Export the current number of those who is browsing your wiki, in plain text.  This plugin is ported from that of PukiWiki (with some customizing).
 url http://www.dokuwiki.org/plugin:onlinenumber
