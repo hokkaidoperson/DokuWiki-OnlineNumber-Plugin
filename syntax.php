@@ -1,7 +1,10 @@
 <?php
 //
+// DokuWiki Onlinenumber Plugin
+//
+//
 // Original source of this plugin is PukiWiki.
-// Ported by Hokkaidoperson
+// Ported by Hokkaidoperson <dosankomali@yahoo.co.jp>
 //
 //
 // Original Licenses of this plugin:
@@ -14,9 +17,8 @@
 //
 // Online plugin -- Just show the number 'users-on-line'
 
-if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
+// must be run within Dokuwiki
+if(!defined('DOKU_INC')) die();
 
 class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
 
@@ -132,8 +134,6 @@ class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
 
     function handle($match, $state, $pos, &$handler){
 
-        static $count, $result, $base;
-
         return explode('|', substr($match, strlen('{{onlinenumber|'), -2));
 
     }
@@ -152,6 +152,8 @@ class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
 
 
         // Main process
+        static $count, $result, $base;
+
         if (! isset($count)) {
             if (isset($_SERVER['REMOTE_ADDR'])) {
                 $host  = & $_SERVER['REMOTE_ADDR'];
@@ -176,7 +178,7 @@ class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
             }
         } else {
             if (! isset($base)) $base = basename(PLUGIN_ONLINE_USER_LIST);
-            $error = 'onlinenumber: "' . $base . '" not writable;';
+            $error = $this->getLang('err1') . $base . $this->getLang('err2');
             $renderer->doc .= htmlspecialchars($error); // String
         }
 
@@ -184,5 +186,3 @@ class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
 
 
 }
- 
-?>
