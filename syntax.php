@@ -132,13 +132,13 @@ class syntax_plugin_onlinenumber extends DokuWiki_Syntax_Plugin {
     }
 
 
-    function handle($match, $state, $pos, &$handler){
+    function handle($match, $state, $pos, Doku_Handler $handler){
 
         return explode('|', substr($match, strlen('{{onlinenumber|'), -2));
 
     }
 
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         define('PLUGIN_ONLINE_TIMEOUT', $this->getConf('onlineseconds')); // Count users in N seconds
         
         // List of 'IP-address|last-access-time(seconds)'
